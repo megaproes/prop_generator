@@ -1,6 +1,6 @@
 #pragma once
-#include "ReportGenerators/ReportGenerator.h"
-
+#include "ReportGenerator.h"
+#include "csv/csv.hpp"
 class CsvReportGenerator : public ReportGenerator
 {
 public:

@@ -1,5 +1,6 @@
 #pragma once
-#include "ReportGenerators/ReportGenerator.h"
+#include "ReportGenerator.h"
+#include "nlohmann/json.hpp"
 
 class JsonReportGenerator : public ReportGenerator
 {

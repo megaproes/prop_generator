@@ -8,13 +8,9 @@
 #include <sstream>
 #include <iostream>
 
-#include "nlohmann/json.hpp"
-#include "csv/csv.hpp"
-#include "pugixml-master/pugixml.hpp"
-
 #include <chrono>
 #include <ctime>
-#include <memory>
+
 class ReportGenerator
 {
 public:

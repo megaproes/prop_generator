@@ -1,5 +1,6 @@
 #pragma once
-#include "ReportGenerators/ReportGenerator.h"
+#include "ReportGenerator.h"
+#include "pugixml-master/pugixml.hpp"
 
 class XmlReportGenerator : public ReportGenerator
 {

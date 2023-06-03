@@ -1,5 +1,5 @@
 #pragma once
-#include "ReportGenerators/ReportGenerator.h"
+#include "ReportGenerator.h"
 
 class TxtReportGenerator : public ReportGenerator
 {

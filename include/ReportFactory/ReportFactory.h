@@ -1,6 +1,6 @@
 #pragma once
 #include "ReportGenerators/ReportGenerator.h"
-
+#include <memory>
 class ReportFactory
 {
 public:

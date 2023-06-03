@@ -2,7 +2,7 @@
 #include <vector>
 #include "ReportFactory/ReportFactory.h"
 #include "DirectoryReader/DirectoryReader.h"
-
+#include <unordered_map>
 // Helper function to read a directory and catch any exceptions that may be thrown
 std::vector<std::string> readDirectory(const std::string &directoryPath)
 {
