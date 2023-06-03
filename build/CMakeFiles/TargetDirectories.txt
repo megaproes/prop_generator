@@ -1,0 +1,3 @@
+F:/VS_Code_2/01_HomeWork/Task1/build/CMakeFiles/Task1.dir
+F:/VS_Code_2/01_HomeWork/Task1/build/CMakeFiles/edit_cache.dir
+F:/VS_Code_2/01_HomeWork/Task1/build/CMakeFiles/rebuild_cache.dir
