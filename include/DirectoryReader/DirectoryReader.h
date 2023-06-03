@@ -7,7 +7,7 @@ class DirectoryReader
 {
 public:
 	DirectoryReader() = default;
-	std::vector<std::string> read(const std::string &_directoryPath);
+	std::vector<std::string> read(const std::string &directoryPath);
 
 private:
 	std::string getTimeString(const std::filesystem::file_time_type &time);

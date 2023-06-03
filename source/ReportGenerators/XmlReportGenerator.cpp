@@ -1,4 +1,4 @@
-#include "XmlReportGenerator.h"
+#include "ReportGenerators/XmlReportGenerator.h"
 
 std::string XmlReportGenerator::getFileExtension() const
 {

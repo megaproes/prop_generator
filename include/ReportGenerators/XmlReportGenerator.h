@@ -1,10 +1,11 @@
 #pragma once
-#include "ReportGenerator.h"
+#include "ReportGenerators/ReportGenerator.h"
 
-class TxtReportGenerator : public ReportGenerator
+class XmlReportGenerator : public ReportGenerator
 {
+
 public:
-	TxtReportGenerator() = default;
+	XmlReportGenerator() = default;
 	std::string getFileExtension() const override;
 	void writeData(std::ofstream &outputFile, const std::vector<std::string> &data) override;
 };

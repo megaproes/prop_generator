@@ -1,4 +1,4 @@
-#include "TxtReportGenerator.h"
+#include "ReportGenerators/TxtReportGenerator.h"
 
 std::string TxtReportGenerator::getFileExtension() const
 {

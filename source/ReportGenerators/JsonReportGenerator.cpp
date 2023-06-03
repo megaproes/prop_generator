@@ -1,4 +1,4 @@
-#include "JsonReportGenerator.h"
+#include "ReportGenerators/JsonReportGenerator.h"
 
 std::string JsonReportGenerator::getFileExtension() const
 {

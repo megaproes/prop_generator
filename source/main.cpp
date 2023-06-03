@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
-#include "ReportFactory.h"
-#include "DirectoryReader.h"
+#include "ReportFactory/ReportFactory.h"
+#include "DirectoryReader/DirectoryReader.h"
 
 std::vector<std::string> readDirectory(const std::string &directoryPath)
 {
@@ -12,8 +12,8 @@ std::vector<std::string> readDirectory(const std::string &directoryPath)
 	}
 	catch (const std::runtime_error &exc)
 	{
-		std::cerr << exc.what() << '\n';
-		exit(1);
+		std::cerr << "Error reading directory: " << exc.what() << '\n';
+		throw;
 	}
 }
 
@@ -21,13 +21,13 @@ void generateReport(ReportFactory::ReportType reportType, const std::vector<std:
 {
 	try
 	{
-		std::unique_ptr<ReportGenerator> reportGenerator{ReportFactory::createReportGenerator(reportType)};
+		auto reportGenerator = ReportFactory::createReportGenerator(reportType);
 		reportGenerator->generate(data);
 	}
 	catch (const std::runtime_error &exc)
 	{
-		std::cerr << exc.what() << '\n';
-		exit(1);
+		std::cerr << "Error generating report: " << exc.what() << '\n';
+		throw;
 	}
 }
 
@@ -35,32 +35,60 @@ int main(int argc, char *argv[])
 {
 	if (argc < 3)
 	{
-		std::cout << "Wrong format . . ." << std::endl;
-		std::cout << "Usage: "
-				<< " <directory> <report_type_1> ...<report_type_n>" << std::endl;
+		std::cout << "Usage: <directory> <report_type_1> ...<report_type_n>" << std::endl;
 		return 1;
 	}
-	const std::string directoryPath{argv[1]};
-	std::vector<std::string> data = readDirectory(directoryPath);
 
-	const auto reportTypeMap = std::unordered_map<std::string, ReportFactory::ReportType>{
+	const std::string directoryPath{argv[1]};
+	std::vector<std::string> data;
+
+	try
+	{
+		data = readDirectory(directoryPath);
+	}
+	catch (const std::runtime_error &)
+	{
+		return 1;
+	}
+
+	const std::unordered_map<std::string, ReportFactory::ReportType> reportTypeMap{
 	    {"txt", ReportFactory::ReportType::Txt},
 	    {"json", ReportFactory::ReportType::Json},
 	    {"xml", ReportFactory::ReportType::Xml},
 	    {"csv", ReportFactory::ReportType::Csv}};
 
-	for (int i = 2; i < argc; i++)
+	int failedReportsCount = 0;
+	for (int i = 2; i < argc; ++i)
 	{
 		const std::string reportTypeStr{argv[i]};
 		const auto it = reportTypeMap.find(reportTypeStr);
+
 		if (it == reportTypeMap.end())
 		{
 			std::cout << "Invalid report type: " << reportTypeStr << std::endl;
+			++failedReportsCount;
 			continue;
 		}
-		generateReport(it->second, data);
+
+		try
+		{
+			generateReport(it->second, data);
+		}
+		catch (const std::runtime_error &)
+		{
+			++failedReportsCount;
+		}
 	}
 
-	std::cout << "Success" << std::endl;
+	const int successfulReportsCount = argc - 2 - failedReportsCount;
+	if (successfulReportsCount > 0)
+	{
+		std::cout << successfulReportsCount << " files are generated to '" << directoryPath << "'\n";
+	}
+	else
+	{
+		std::cout << "No files generated. Make sure there is a correct format: <directory> <report_type_1> ...<report_type_n>\n";
+	}
+
 	return 0;
 }

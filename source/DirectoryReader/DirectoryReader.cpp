@@ -1,4 +1,4 @@
-#include "DirectoryReader.h"
+#include "DirectoryReader/DirectoryReader.h"
 
 std::vector<std::string> DirectoryReader::read(const std::string &directoryPath)
 {

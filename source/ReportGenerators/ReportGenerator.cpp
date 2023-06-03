@@ -1,4 +1,4 @@
-#include "ReportGenerator.h"
+#include "ReportGenerators/ReportGenerator.h"
 void ReportGenerator::generate(const std::vector<std::string> &data)
 {
 	auto filename = generateFilename();

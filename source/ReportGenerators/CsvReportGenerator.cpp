@@ -1,4 +1,4 @@
-#include "CsvReportGenerator.h"
+#include "ReportGenerators/CsvReportGenerator.h"
 
 std::string CsvReportGenerator::getFileExtension() const
 {
