@@ -11,6 +11,7 @@ void CsvReportGenerator::writeData(std::ofstream &outputFile, const std::vector<
 	writer << std::vector<std::string>({"File", "Size", "Modified", "Type", "Read-only"});
 	for (const auto &entry : data)
 	{
+		// Split each entry into separate lines
 		std::istringstream iss(entry);
 		std::vector<std::string> row;
 		std::string line;
@@ -18,6 +19,7 @@ void CsvReportGenerator::writeData(std::ofstream &outputFile, const std::vector<
 		{
 			row.push_back(line);
 		}
+		// Writing each line as a separate row in the CSV
 		writer << row;
 	}
 }

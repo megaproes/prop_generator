@@ -17,6 +17,7 @@ void XmlReportGenerator::writeData(std::ofstream &outputFile, const std::vector<
 		std::string line;
 		while (std::getline(ss, line))
 		{
+			// For each line in the entry, add it as a child node to the entry node
 			size_t separator = line.find(':');
 			if (separator != std::string::npos)
 			{
@@ -26,7 +27,7 @@ void XmlReportGenerator::writeData(std::ofstream &outputFile, const std::vector<
 			}
 		}
 	}
-
+	// Convert the XML document to a string and write it to the output file
 	std::stringstream ss;
 	doc.save(ss);
 	outputFile << ss.str();

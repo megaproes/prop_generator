@@ -3,6 +3,7 @@
 #include "ReportFactory/ReportFactory.h"
 #include "DirectoryReader/DirectoryReader.h"
 
+// Helper function to read a directory and catch any exceptions that may be thrown
 std::vector<std::string> readDirectory(const std::string &directoryPath)
 {
 	DirectoryReader reader;
@@ -17,6 +18,7 @@ std::vector<std::string> readDirectory(const std::string &directoryPath)
 	}
 }
 
+// Helper function to generate a report and catch any exceptions that may be thrown
 void generateReport(ReportFactory::ReportType reportType, const std::vector<std::string> &data)
 {
 	try
@@ -33,6 +35,7 @@ void generateReport(ReportFactory::ReportType reportType, const std::vector<std:
 
 int main(int argc, char *argv[])
 {
+	// Check for correct number of command line arguments
 	if (argc < 3)
 	{
 		std::cout << "Usage: <directory> <report_type_1> ...<report_type_n>" << std::endl;
@@ -51,6 +54,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	// Map report type string to enum
 	const std::unordered_map<std::string, ReportFactory::ReportType> reportTypeMap{
 	    {"txt", ReportFactory::ReportType::Txt},
 	    {"json", ReportFactory::ReportType::Json},
@@ -58,6 +62,8 @@ int main(int argc, char *argv[])
 	    {"csv", ReportFactory::ReportType::Csv}};
 
 	int failedReportsCount = 0;
+
+	// Process each report type command line argument
 	for (int i = 2; i < argc; ++i)
 	{
 		const std::string reportTypeStr{argv[i]};
@@ -80,6 +86,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	// Print out the number of successful reports
 	const int successfulReportsCount = argc - 2 - failedReportsCount;
 	if (successfulReportsCount > 0)
 	{

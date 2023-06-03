@@ -3,6 +3,7 @@
 #include "ReportGenerators/JsonReportGenerator.h"
 #include "ReportGenerators/XmlReportGenerator.h"
 #include "ReportGenerators/CsvReportGenerator.h"
+
 std::unique_ptr<ReportGenerator> ReportFactory::createReportGenerator(ReportFactory::ReportType type)
 {
 	switch (type)
